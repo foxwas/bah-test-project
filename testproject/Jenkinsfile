@@ -5,12 +5,12 @@ node {
     
     stage ("Gradle Build - DataService") {
 	
-        sh 'gradle clean build'
+        sh '-b testproject/build.gradle gradle clean build'
 
     }
     
     stage ("Gradle Bootjar-Package - DataService") {
-        sh 'gradle bootjar'
+        sh '-b testproject/build.gradle gradle bootjar'
     }
     
     stage('User Acceptance Test - DataService') {
@@ -22,7 +22,7 @@ node {
 	  if(response=="Yes") {
 
 	    stage('Release- DataService') {
-	     sh 'gradle build -x test'
+	     sh '-b testproject/build.gradle gradle build -x test'
 	     sh 'echo DataService is ready to release!'
 
 	    }
